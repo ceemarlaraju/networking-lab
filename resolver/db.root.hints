@@ -1,0 +1,2 @@
+.       IN  NS  a.root.local.
+a.root.local.   IN  A   10.0.0.2
