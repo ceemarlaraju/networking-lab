@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+  root:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: root-dns
+    volumes:
+      - ./root:/etc/bind
+    networks:
+      dns-lab:
+        ipv4_address: 10.0.0.2
+
+  tld:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: tld-dns
+    volumes:
+      - ./tld:/etc/bind
+    networks:
+      dns-lab:
+        ipv4_address: 10.0.0.3
+
+  auth:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: auth-dns
+    volumes:
+      - ./auth:/etc/bind
+    networks:
+      dns-lab:
+        ipv4_address: 10.0.0.4
+
+  resolver:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: resolver-dns
+    volumes:
+      - ./resolver:/etc/bind
+    networks:
+      dns-lab:
+        ipv4_address: 10.0.0.5
+
+  client:
+    image: ubuntu:22.04
+    container_name: dns-client
+    command: sleep infinity
+    networks:
+      dns-lab:
+        ipv4_address: 10.0.0.10
+
+networks:
+  dns-lab:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24

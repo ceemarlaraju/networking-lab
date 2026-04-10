@@ -1,0 +1,13 @@
+$TTL 86400
+@   IN  SOA a.root.local. admin.root.local. (
+        2024040101 ; serial
+        3600       ; refresh
+        1800       ; retry
+        604800     ; expire
+        86400 )    ; minimum
+
+@       IN  NS  a.root.local.
+a.root.local.   IN  A   10.0.0.2
+
+com.    IN  NS  ns.com.local.
+ns.com.local.  IN  A   10.0.0.3
